@@ -1,4 +1,5 @@
 #include "Zest.hpp"
+#include "Attributes.hpp"
 
 #include "Logs.hpp"
 #include "Tools.hpp"
@@ -29,13 +30,13 @@ bool Zest::set_html(bool value)
     return (value);
 }
 
-bool Zest::check_id(std::string id)
+bool Zest::check_id_a(std::string id)
 {
     int index = 0;
 
-    for (auto i = this->ids.begin(); i != this->ids.end(); i++) {
+    for (auto i = this->a_id.begin(); i != this->a_id.end(); i++) {
         if (*i == id) {
-            this->ids.erase(this->ids.begin() + index);
+            this->a_id.erase(this->a_id.begin() + index);
             return (true);
         }
         index++;
@@ -44,9 +45,9 @@ bool Zest::check_id(std::string id)
     return (false);
 }
 
-bool Zest::set_id(std::string id)
+bool Zest::set_id_a(std::string id)
 {
-    this->ids.push_back(id);
+    a_id.push_back(id);
 
     return (true);
 }
@@ -94,9 +95,27 @@ std::string Zest::html()
 
 std::string Zest::a(std::string id)
 {
-    if (check_id(id) == true) {
+    if (check_id_a(id) == true) {
         return ("</a>");
     }
-    Zest::set_id(id);
+    Zest::set_id_a(id);
     return ("<a>");
+}
+
+std::string Zest::a(std::string id, Attributes::a attributes)
+{
+    std::string begin = "<a";
+    std::string end = ">";
+    std::string data = "";
+
+    if (check_id_a(id) == true) {
+        return ("</a>");
+    }
+
+    data.append(begin);
+    data.append(attributes.get_attributes());
+    data.append(end);
+
+    Zest::set_id_a(id);
+    return (data);
 }
