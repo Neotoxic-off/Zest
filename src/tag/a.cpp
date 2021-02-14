@@ -1,4 +1,4 @@
-#include "Attributes.hpp"
+#include "Zest.hpp"
 
 #include "Logs.hpp"
 
@@ -24,13 +24,7 @@ Attributes::a::~a()
 
 std::string Attributes::a::get_template(std::string att, std::string value)
 {
-    std::string data = " ";
-
-    data.append(att);
-    data.append(value);
-    data.append("\"");
-
-    return (data);
+    return (" " + att + value + "\"");
 }
 
 std::string Attributes::a::get_attributes()
@@ -47,39 +41,39 @@ std::string Attributes::a::get_attributes()
     std::string type = Attributes::a::type();
 
     if (download != EMPTY) {
-        data.append(Attributes::a::get_template("download=\"", download));
+        data += Attributes::a::get_template("download=\"", download);
     }
 
     if (href != EMPTY) {
-        data.append(Attributes::a::get_template("href=\"", href));
+        data += Attributes::a::get_template("href=\"", href);
     }
 
     if (hreflang != EMPTY) {
-        data.append(Attributes::a::get_template("hreflang=\"", hreflang));
+        data += Attributes::a::get_template("hreflang=\"", hreflang);
     }
 
     if (media != EMPTY) {
-        data.append(Attributes::a::get_template("media=\"", media));
+        data += Attributes::a::get_template("media=\"", media);
     }
 
     if (ping != EMPTY) {
-        data.append(Attributes::a::get_template("ping=\"", ping));
+        data += Attributes::a::get_template("ping=\"", ping);
     }
 
     if (referrerpolicy != EMPTY) {
-        data.append(Attributes::a::get_template("referrerpolicy=\"", referrerpolicy));
+        data += Attributes::a::get_template("referrerpolicy=\"", referrerpolicy);
     }
 
     if (rel != EMPTY) {
-        data.append(Attributes::a::get_template("rel=\"", rel));
+        data += Attributes::a::get_template("rel=\"", rel);
     }
 
     if (target != EMPTY) {
-        data.append(Attributes::a::get_template("target=\"", target));
+        data += Attributes::a::get_template("target=\"", target);
     }
 
     if (type != EMPTY) {
-        data.append(Attributes::a::get_template("type=\"", type));
+        data += Attributes::a::get_template("type=\"", type);
     }
 
     return (data);

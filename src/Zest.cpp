@@ -4,33 +4,61 @@
 #include "Logs.hpp"
 #include "Tools.hpp"
 
-Zest::Zest()
+Zest::Zest::Zest()
+{
+    Settings settings;
+
+    this->_html_ = false;
+
+    return;
+}
+
+Zest::Zest::~Zest()
 {
     this->_html_ = false;
 
     return;
 }
 
-Zest::~Zest()
+Zest::Settings::Settings()
 {
-    this->_html_ = false;
+    Settings::verbose(false);
 
     return;
 }
 
-bool Zest::check(bool data)
+Zest::Settings::~Settings()
+{
+    return;
+}
+
+bool Zest::Settings::verbose(bool value)
+{
+    this->verbose_t = value;
+
+    if (this->verbose_t == value)
+        return (true);
+    return (false);
+}
+
+bool Zest::Settings::verbose()
+{
+    return (this->verbose_t);
+}
+
+bool Zest::Zest::check(bool data)
 {
     return (data);
 }
 
-bool Zest::set_html(bool value)
+bool Zest::Zest::set_html(bool value)
 {
     this->_html_ = value;
 
     return (value);
 }
 
-bool Zest::check_id_a(std::string id)
+bool Zest::Zest::check_id_a(std::string id)
 {
     int index = 0;
 
@@ -45,77 +73,59 @@ bool Zest::check_id_a(std::string id)
     return (false);
 }
 
-bool Zest::set_id_a(std::string id)
+bool Zest::Zest::set_id_a(std::string id)
 {
     a_id.push_back(id);
 
     return (true);
 }
 
-std::string Zest::description(std::string content)
+std::string Zest::Zest::description()
 {
-    std::string begin = "<!--";
-    std::string end = "-->";
-    std::string data = "";
-
-    data.append(begin);
-    if (content.empty() == false) {
-        data.append(content);
-    }
-    data.append(end);
-
-    return (data);
+    return ("<!-- --->");
 }
 
-std::string Zest::doctype(std::string content)
+std::string Zest::Zest::description(std::string content)
 {
-    std::string begin = "<!DOCTYPE";
-    std::string end = ">";
-    std::string data = "";
-
-    data.append(begin);
-    if (!content.empty()) {
-        data.append(" ");
-        data.append(content);
-    }
-    data.append(end);
-
-    return (data);
+    return ("<!-- " + content + " -->");
 }
 
-std::string Zest::html()
+std::string Zest::Zest::doctype()
 {
-    if (Zest::check(this->_html_) == true) {
-        Zest::set_html(false);
+    return ("<!DOCTYPE>");
+}
+
+std::string Zest::Zest::doctype(std::string content)
+{
+    return ("<!DOCTYPE " + content + ">");
+}
+
+std::string Zest::Zest::html()
+{
+    if (Zest::Zest::check(this->_html_) == true) {
+        Zest::Zest::set_html(false);
         return ("</html>");
     }
-    Zest::set_html(true);
+    Zest::Zest::set_html(true);
     return ("<html>");
 }
 
-std::string Zest::a(std::string id)
+std::string Zest::Zest::a(std::string id)
 {
-    if (check_id_a(id) == true) {
+    if (Zest::Zest::check_id_a(id) == true) {
         return ("</a>");
     }
     Zest::set_id_a(id);
     return ("<a>");
 }
 
-std::string Zest::a(std::string id, Attributes::a attributes)
+std::string Zest::Zest::a(std::string id, Attributes::a attributes)
 {
-    std::string begin = "<a";
-    std::string end = ">";
-    std::string data = "";
 
-    if (check_id_a(id) == true) {
+    if (Zest::Zest::check_id_a(id) == true) {
         return ("</a>");
     }
 
-    data.append(begin);
-    data.append(attributes.get_attributes());
-    data.append(end);
-
     Zest::set_id_a(id);
-    return (data);
+    return ("<a" + attributes.get_attributes() + ">");
 }

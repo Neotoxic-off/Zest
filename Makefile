@@ -1,4 +1,5 @@
 OBJS	=	$(patsubst %.cpp, %.o, $(wildcard src/*.cpp))
+OBJS	+=	$(patsubst %.cpp, %.o, $(wildcard src/*/*.cpp))
 
 INCLUDE	=	include
 

@@ -1,27 +1,25 @@
 #include "Zest.hpp"
 
-#include "Attributes.hpp"
-
-int set_att(Attributes::a *att_a)
+int set_att(Attributes::a *a_attributes)
 {
-    att_a->download("URL_DOWNLOAD");
-    att_a->href("MY_HREF");
+    a_attributes->download("URL_DOWNLOAD");
+    a_attributes->href("MY_HREF");
 
     return (0);
 }
 
 int main(void)
 {
-    Zest zest;
-    Attributes::a att_a;
+    Zest::Zest zest;
+    Attributes::a a_attributes;
 
-    set_att(&att_a);
+    set_att(&a_attributes);
 
     std::string empty = "";
 
     std::cout << zest.doctype("html") << std::endl;
     std::cout << zest.html() << std::endl;
-    std::cout << zest.a("main", att_a) << std::endl;
+    std::cout << zest.a("main", a_attributes) << std::endl;
     std::cout << zest.description("DATA CONTENT") << std::endl;
     std::cout << zest.a("main") << std::endl;
     std::cout << zest.html() << std::endl;
