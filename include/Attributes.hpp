@@ -65,6 +65,11 @@
             private:
                 std::string get_template(std::string, std::string);
         };
+    
+        class doctype
+        {
+
+        };
     };
 
 #endif /* _ATTRIBUTES_HPP_ */

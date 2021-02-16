@@ -26,7 +26,7 @@ clean:
 	@echo "\e[32m[ DONE ]\033[0m  Cleanned *o"
 
 fclean: clean
-	@rm $(NAME)
+	@$(RM) $(NAME)
 	@echo "\e[32m[ DONE ]\033[0m  Cleanned $(NAME)"
 
 re:	fclean all
