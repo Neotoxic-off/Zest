@@ -1,5 +1,4 @@
-OBJS	=	$(patsubst %.cpp, %.o, $(wildcard src/*.cpp))
-OBJS	+=	$(patsubst %.cpp, %.o, $(wildcard src/*/*.cpp))
+OBJS	:=	$(patsubst %.cpp, %.o, $(shell find src -type f -name "*.cpp"))
 
 INCLUDE	=	include
 
@@ -7,19 +6,27 @@ HFILE	=	$(wildcard $(INCLUDE)/*.hpp)
 
 NAME	=	zest.out
 
-FLAG	=	-I $(INCLUDE)
-FLAG	+=	-g3
-FLAG	+=	-Wall -Wextra -O3 -fno-builtin
+INC_FLAG	=	-I $(INCLUDE)
 
-CC	=	@g++
+OBJ_FLAG	=	-g3
+OBJ_FLAG	+=	-Weverything
+OBJ_FLAG	+=	-Wno-gnu
+OBJ_FLAG	+=	-march=native
+
+DEBUG_FLAGS	=	-O0
+
+CC	=	@clang++
 RM	=	@rm -f
 
 all:	$(NAME)
 
-$(NAME):	$(OBJS)
-	$(CC) -o $(NAME) $(OBJS) $(FLAG)
+$(NAME): $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) $(OBJ_FLAG)
 
 $(OBJS): $(HFILE)
+
+debug: $(OBJS)
+	$(CC) -o $(NAME) $(OBJS) $(OBJ_FLAG) $(DEBUG_FLAGS)
 
 clean:
 	@$(RM) $(OBJS)
@@ -32,6 +39,6 @@ fclean: clean
 re:	fclean all
 
 .cpp.o:	%.c
-	@$(CC) -c $< -o $@ $(FLAG) && echo "\e[32m[ DONE ] \033[0m" $< || echo "\e[91;5m[ FAIL ] \e[25m" $< "\033[0m"
+	@$(CC) -c $< -o $@ $(INC_FLAG) && echo "\e[32m[ DONE ] \033[0m" $< || echo "\e[91;5m[ FAIL ] \e[25m" $< "\033[0m"
 
 .PHONY: all clean fclean re
