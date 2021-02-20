@@ -30,6 +30,10 @@
                 std::string a(std::string);
                 std::string a(std::string, Attributes::a);
 
+                // img
+                std::string img();
+                std::string img(Attributes::img);
+
             private:
                 bool _html_;
 

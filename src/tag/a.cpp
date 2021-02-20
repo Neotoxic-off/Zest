@@ -4,6 +4,7 @@
 
 Attributes::a::a()
 {
+    Attributes::a::id(EMPTY);
     Attributes::a::download(EMPTY);
     Attributes::a::href(EMPTY);
     Attributes::a::hreflang(EMPTY);
@@ -19,6 +20,17 @@ Attributes::a::a()
 
 Attributes::a::~a()
 {
+    Attributes::a::id(EMPTY);
+    Attributes::a::download(EMPTY);
+    Attributes::a::href(EMPTY);
+    Attributes::a::hreflang(EMPTY);
+    Attributes::a::media(EMPTY);
+    Attributes::a::ping(EMPTY);
+    Attributes::a::referrerpolicy(EMPTY);
+    Attributes::a::rel(EMPTY);
+    Attributes::a::target(EMPTY);
+    Attributes::a::type(EMPTY);
+
     return;
 }
 
@@ -30,6 +42,7 @@ std::string Attributes::a::get_template(std::string att, std::string value)
 std::string Attributes::a::get_attributes()
 {
     std::string data = "";
+    std::string id = Attributes::a::id();
     std::string download = Attributes::a::download();
     std::string href = Attributes::a::href();
     std::string hreflang = Attributes::a::hreflang();
@@ -39,6 +52,10 @@ std::string Attributes::a::get_attributes()
     std::string rel = Attributes::a::rel();
     std::string target = Attributes::a::target();
     std::string type = Attributes::a::type();
+
+    if (id != EMPTY) {
+        data += Attributes::a::get_template("class=\"", id);
+    }
 
     if (download != EMPTY) {
         data += Attributes::a::get_template("download=\"", download);
@@ -79,6 +96,27 @@ std::string Attributes::a::get_attributes()
     return (data);
 }
 
+bool Attributes::a::id(std::string value)
+{
+    Logs logs;
+
+    this->id_t = value;
+
+    if (Attributes::a::id() == value) {
+        logs.done("a attribute id set");
+
+        return (true);
+    }
+    logs.fail("a attribute id not set");
+
+    return (false);
+}
+
+std::string Attributes::a::id()
+{
+    return (this->id_t);
+}
+
 bool Attributes::a::download(std::string value)
 {
     Logs logs;
@@ -86,11 +124,11 @@ bool Attributes::a::download(std::string value)
     this->download_t = value;
 
     if (Attributes::a::download() == value) {
-        logs.done("attribute download set");
+        logs.done("a attribute download set");
 
         return (true);
     }
-    logs.fail("attribute download not set");
+    logs.fail("a attribute download not set");
 
     return (false);
 }
@@ -107,11 +145,11 @@ bool Attributes::a::href(std::string value)
     this->href_t = value;
 
     if (Attributes::a::href() == value) {
-        logs.done("attribute href set");
+        logs.done("a attribute href set");
 
         return (true);
     }
-    logs.fail("attribute href not set");
+    logs.fail("a attribute href not set");
 
     return (false);
 }
@@ -128,11 +166,11 @@ bool Attributes::a::hreflang(std::string value)
     this->hreflang_t = value;
 
     if (Attributes::a::hreflang() == value) {
-        logs.done("attribute hreflang set");
+        logs.done("a attribute hreflang set");
 
         return (true);
     }
-    logs.fail("attribute hreflang not set");
+    logs.fail("a attribute hreflang not set");
 
     return (false);
 }
@@ -149,11 +187,11 @@ bool Attributes::a::media(std::string value)
     this->media_t = value;
 
     if (Attributes::a::media() == value) {
-        logs.done("attribute media set");
+        logs.done("a attribute media set");
 
         return (true);
     }
-    logs.fail("attribute media not set");
+    logs.fail("a attribute media not set");
 
     return (false);
 }
@@ -170,11 +208,11 @@ bool Attributes::a::ping(std::string value)
     this->ping_t = value;
 
     if (Attributes::a::ping() == value) {
-        logs.done("attribute ping set");
+        logs.done("a attribute ping set");
 
         return (true);
     }
-    logs.fail("attribute ping not set");
+    logs.fail("a attribute ping not set");
 
     return (false);
 }
@@ -191,11 +229,11 @@ bool Attributes::a::referrerpolicy(std::string value)
     this->referrerpolicy_t = value;
 
     if (Attributes::a::referrerpolicy() == value) {
-        logs.done("attribute referrerpolicy set");
+        logs.done("a attribute referrerpolicy set");
 
         return (true);
     }
-    logs.fail("attribute referrerpolicy not set");
+    logs.fail("a attribute referrerpolicy not set");
 
     return (false);
 }
@@ -212,11 +250,11 @@ bool Attributes::a::rel(std::string value)
     this->rel_t = value;
 
     if (Attributes::a::rel() == value) {
-        logs.done("attribute rel set");
+        logs.done("a attribute rel set");
 
         return (true);
     }
-    logs.fail("attribute rel not set");
+    logs.fail("a attribute rel not set");
 
     return (false);
 }
@@ -233,11 +271,11 @@ bool Attributes::a::target(std::string value)
     this->target_t = value;
 
     if (Attributes::a::target() == value) {
-        logs.done("attribute target set");
+        logs.done("a attribute target set");
 
         return (true);
     }
-    logs.fail("attribute target not set");
+    logs.fail("a attribute target not set");
 
     return (false);
 }
@@ -254,11 +292,11 @@ bool Attributes::a::type(std::string value)
     this->type_t = value;
 
     if (Attributes::a::type() == value) {
-        logs.done("attribute type set");
+        logs.done("a attribute type set");
 
         return (true);
     }
-    logs.fail("attribute type not set");
+    logs.fail("a attribute type not set");
 
     return (false);
 }

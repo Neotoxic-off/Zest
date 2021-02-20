@@ -129,3 +129,8 @@ std::string Zest::Zest::a(std::string id, Attributes::a attributes)
     Zest::set_id_a(id);
     return ("<a" + attributes.get_attributes() + ">");
 }
+
+std::string Zest::Zest::img(Attributes::img attributes)
+{
+    return ("<img" + attributes.get_attributes() + ">");
+}
